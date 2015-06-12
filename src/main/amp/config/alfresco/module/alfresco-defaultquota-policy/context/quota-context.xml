@@ -29,7 +29,7 @@
 		</property>
 		<!-- The default quota for new users (in bytes) 2GB-->
 		<property name="defaultQuota">
-            <value>${defaultQuotaInBytes}</value>
+            <value>${defaultQuota}</value>
 		</property>
 	</bean>
 </beans>

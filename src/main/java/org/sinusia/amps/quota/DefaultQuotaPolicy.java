@@ -29,14 +29,11 @@ import org.alfresco.repo.node.NodeServicePolicies.OnCreateNodePolicy;
 import org.alfresco.repo.policy.Behaviour;
 import org.alfresco.repo.policy.JavaBehaviour;
 import org.alfresco.repo.policy.PolicyComponent;
-
 import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
-
 import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
-
 import org.alfresco.service.cmr.usage.ContentUsageService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
@@ -76,7 +73,24 @@ public class DefaultQuotaPolicy implements OnCreateNodePolicy {
 	}
 
 	public void setDefaultQuota(String defaultQuota) {
-		this.defaultQuota = defaultQuota;
+		System.out.println(defaultQuota);
+		String[] parts = defaultQuota.split("(?<=\\d)(?=\\D)");
+		long bytes = 0;
+		switch (parts[1].trim()) {
+			case "KB":
+			case "K":
+				bytes = Integer.parseInt(parts[0].trim()) * 1024L;
+				break;
+			case "MB":
+			case "M":
+				bytes = Integer.parseInt(parts[0].trim()) * 1048576L;
+				break;
+			case "GB":
+			case "G":
+				bytes = Integer.parseInt(parts[0].trim()) * 1073741824L;
+				break;
+		}
+		this.defaultQuota = String.valueOf(bytes);
 	}
 
 	public void init() {
