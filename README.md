@@ -15,4 +15,9 @@ is provided at user creation time, which then overrides the default.
 It's also possible to override the value of the property defaultQuota from within the alfresco-global.properties
 Possible values can be expressed in KB, MB, GB
 
+In order to enable this addon, you have to make sure the usage control of Alfresco is enabled.
+You can enable it including the property bellow into the alfresco-global.properties:
+
+system.usages.enabled=true
+
 Currently tested with 5.0.d
